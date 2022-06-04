@@ -3,7 +3,7 @@ import Head from 'next/head';
 import styled from 'styled-components';
 
 import { pageContext } from '../utils/pageContext';
-import { ExternalPageProps } from '../utils/ssrProps';
+import { ExternalPageProps } from '../utils/declareSsrProps';
 
 import { Header } from './Header';
 import { Footer } from './Footer';
@@ -18,14 +18,21 @@ const StyledContent = styled.div`
     min-height: calc(100vh - 160px);
 `;
 
+export const PageContent = styled.div`
+    padding: 10px 40px 0 40px;
+`;
+
 export const Page: React.FC<PageProps> = ({ title, locale, children }) => {
     return (
         <pageContext.Provider value={{ locale }}>
             <Head>
                 <title>{title}</title>
             </Head>
+
             <Header />
+
             <StyledContent>{children}</StyledContent>
+
             <Footer />
         </pageContext.Provider>
     );
